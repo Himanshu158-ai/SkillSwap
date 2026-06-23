@@ -28,7 +28,7 @@ export async function PATCH(request) {
             return NextResponse.json({ success: false, message: "Unauthorized!" }, { status: 401 });
         }
 
-        const user = await User.findOneAndUpdate({ _id: userId }, { phone, bio, location, canTeach, wantsToLearn, isProfileSetup: true }, { new: true }).select("-password");
+        const user = await User.findOneAndUpdate({ _id: userId }, { phone, bio, location, canTeach, wantsToLearn, isProfileCompleted: true }, { new: true }).select("-password");
         if (!user) {
             return NextResponse.json({ success: false, message: "User not found!" }, { status: 404 });
         }

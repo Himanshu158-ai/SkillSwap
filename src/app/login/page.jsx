@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,6 +31,12 @@ export default function LoginPage() {
     
     const data = await res.json();
     console.log(data);
+    if(data.success){
+      router.push("/");
+    } else {
+      alert(data.message);
+    }
+
   };
 
   return (

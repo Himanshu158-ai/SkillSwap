@@ -8,7 +8,7 @@ export async function POST(request) {
     try {
         await connectDB();
 
-        const { name, email, password, phone, bio, location, canTeach, wantsToLearn } = await request.json();
+        const { name, email, password } = await request.json();
 
         const user = await User.findOne({ email });
         if (user) {
@@ -24,11 +24,6 @@ export async function POST(request) {
             name,
             email,
             password: hashedPassword,
-            phone,
-            bio,
-            location,
-            canTeach,
-            wantsToLearn,
         });
 
         await newUser.save();
