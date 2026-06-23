@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/context/ToastContext";
 
 export default function ProfileSetupPage() {
+  const router = useRouter();
+  const toast = useToast();
   const [formData, setFormData] = useState({
     phone: "",
     bio: "",
@@ -48,9 +52,10 @@ export default function ProfileSetupPage() {
     const data = await res.json();
 
     if(data.success){
-      router.push("/");
+      toast.success("Profile setup completed successfully!");
+      router.push("/discover");
     } else {
-      alert(data.message);
+      toast.error(data.message || "Profile setup failed. Please try again.");
     }
   };
 

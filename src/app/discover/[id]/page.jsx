@@ -2,9 +2,11 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useToast } from "@/context/ToastContext";
 
 export default function UserProfile() {
     const { id } = useParams();
+    const toast = useToast();
 
     const [user, setUser] = useState(null);
 
@@ -32,7 +34,9 @@ export default function UserProfile() {
         const data = await res.json();
 
         if (data.success) {
-            alert(data.message);
+            toast.success(data.message);
+        } else {
+            toast.error(data.message || "Failed to send request.");
         }
     }
 

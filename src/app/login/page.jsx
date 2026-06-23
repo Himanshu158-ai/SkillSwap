@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/context/ToastContext";
 
 export default function LoginPage() {
   const router = useRouter();
+  const toast = useToast();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -32,9 +34,10 @@ export default function LoginPage() {
     const data = await res.json();
     console.log(data);
     if(data.success){
-      router.push("/");
+      toast.success("Welcome back! Logging in...");
+      router.push("/discover");
     } else {
-      alert(data.message);
+      toast.error(data.message || "Invalid credentials. Please try again.");
     }
 
   };

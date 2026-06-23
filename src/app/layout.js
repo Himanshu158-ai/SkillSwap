@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ToastProvider } from "@/context/ToastContext";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,7 +14,11 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`h-full antialiased`}
     >
-      <body suppressHydrationWarning={true} className="min-h-full flex flex-col">{children}</body>
+      <body suppressHydrationWarning={true} className="min-h-full flex flex-col">
+        <ToastProvider>
+          {children}
+        </ToastProvider>
+      </body>
     </html>
   );
 }
