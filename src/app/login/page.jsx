@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -30,10 +31,10 @@ export default function LoginPage() {
       },
       body: JSON.stringify(formData),
     });
-    
+
     const data = await res.json();
     console.log(data);
-    if(data.success){
+    if (data.success) {
       toast.success("Welcome back! Logging in...");
       router.push("/discover");
     } else {
@@ -43,22 +44,42 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl">
-        
+    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-[#F8FCFF]">
+
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#5465FF]/15 rounded-full blur-[120px]" />
+
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#9BB1FF]/30 rounded-full blur-[120px]" />
+
+      <div
+        className="
+  relative
+  z-10
+  w-full
+  max-w-md
+  bg-white/80
+  backdrop-blur-xl
+  border
+  border-white
+  rounded-[32px]
+  p-10
+  shadow-[0_20px_80px_rgba(84,101,255,0.15)]
+"
+      >
+
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white">
-            Welcome Back 👋
+          <h1 className="text-4xl font-bold text-slate-900">
+            Welcome Back
           </h1>
-          <p className="text-slate-400 mt-2">
-            Login to your SkillSwap account
+
+          <p className="text-slate-500 mt-3">
+            Sign in to continue your learning journey
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          
+
           <div>
-            <label className="block text-sm text-slate-300 mb-2">
+            <label className="block text-sm text-slate-700 font-medium mb-2">
               Email
             </label>
             <input
@@ -67,12 +88,26 @@ export default function LoginPage() {
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white outline-none focus:ring-2 focus:ring-green-500"
+              className="
+w-full
+px-4
+py-4
+bg-white
+border
+border-slate-200
+rounded-2xl
+outline-none
+transition-all
+placeholder:text-slate-400
+focus:border-[#5465FF]
+focus:ring-4
+focus:ring-[#5465FF]/10
+"
             />
           </div>
 
           <div>
-            <label className="block text-sm text-slate-300 mb-2">
+            <label className="block text-sm text-slate-700 font-medium mb-2">
               Password
             </label>
             <input
@@ -81,23 +116,61 @@ export default function LoginPage() {
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white outline-none focus:ring-2 focus:ring-green-500"
+              className="
+w-full
+px-4
+py-4
+bg-white
+border
+border-slate-200
+rounded-2xl
+outline-none
+transition-all
+placeholder:text-slate-400
+focus:border-[#5465FF]
+focus:ring-4
+focus:ring-[#5465FF]/10
+"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 bg-green-500 hover:bg-green-600 transition rounded-lg font-semibold text-white cursor-pointer"
+            className="
+w-full
+py-4
+bg-[#5465FF]
+hover:bg-[#4354ee]
+text-white
+font-semibold
+rounded-2xl
+shadow-lg
+shadow-[#5465FF]/20
+transition-all
+cursor-pointer
+"
           >
             Login
           </button>
         </form>
 
+        <div className="flex items-center gap-4 my-6">
+
+          <div className="flex-1 h-px bg-slate-200" />
+
+          <span className="text-sm text-slate-400">
+            OR
+          </span>
+
+          <div className="flex-1 h-px bg-slate-200" />
+
+        </div>
+
         <p className="text-center text-slate-400 mt-6">
           Don't have an account?{" "}
-          <span className="text-green-400 cursor-pointer hover:underline">
+          <Link href={"/register"} className="text-green-400 cursor-pointer hover:underline">
             Register
-          </span>
+          </Link>
         </p>
       </div>
     </div>
