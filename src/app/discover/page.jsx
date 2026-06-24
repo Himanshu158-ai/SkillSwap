@@ -2,15 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import useAuth from "@/context/AuthContext";
 
 export default function DiscoverPage() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [user, loading, router]);
+
+  useEffect(() => {
+    if (user) {
+      fetchUsers();
+    }
+  }, [user]);
 
   const fetchUsers = async () => {
     const res = await fetch("/api/users");
@@ -39,7 +49,16 @@ export default function DiscoverPage() {
     router.push(`/discover/${id}`);
   }
 
-
+  if (loading || !user) {
+    return (
+      <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 rounded-full border-2 border-white/[0.08] border-t-[#5465FF] animate-spin" />
+          <p className="text-[13px] text-[#444]">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-[#E8E6E1]">
@@ -63,7 +82,7 @@ export default function DiscoverPage() {
               transition-colors duration-200 cursor-pointer
             "
           >
-            <span className="hidden sm:inline">Sent </span>Requests
+            <span className="hidden sm:inline">Outbox </span>
           </button>
           <button
             onClick={() => router.push("/request/receive")}
@@ -74,7 +93,7 @@ export default function DiscoverPage() {
               transition-colors duration-200 cursor-pointer
             "
           >
-            <span className="hidden sm:inline">Received </span>Requests
+            <span className="hidden sm:inline">Inbox </span>
           </button>
         </div>
  
@@ -137,7 +156,7 @@ export default function DiscoverPage() {
               >
                 {/* User info */}
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#5465FF]/15 border border-[#5465FF]/20 flex items-center justify-center text-[#8B97FF] text-[13px] font-medium shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#5465FF]/15 border border-[#5465FF]/20 flex items-center justify-center text-[#8B97FF] text-[13px] font-medium shrink-0 uppercase">
                     {user.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                   </div>
                   <div className="min-w-0">

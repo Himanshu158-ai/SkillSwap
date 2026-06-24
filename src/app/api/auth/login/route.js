@@ -3,6 +3,8 @@ import { connectDB } from "@/lib/db";
 import { generateToken } from "@/lib/jwt";
 import User from "@/models/User";
 import bcryptjs from "bcryptjs";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
 
 export async function POST(request) {
     try {
@@ -54,5 +56,38 @@ export async function POST(request) {
     }
 }
 
+
+export async function GET(request) {
+    try {
+        const token = (await cookies()).get("token")?.value;
+
+        if (!token) {
+            return Response.json(
+                { message: "Unauthorized" },
+                { status: 401 }
+            );
+        }
+
+        const decoded = jwt.verify(
+            token,
+            process.env.JWT_SECRET
+        );
+
+        await connectDB();
+
+        const user = await User.findById(decoded.userId)
+            .select("-password");
+
+        return Response.json({
+            success: true,
+            user,
+        });
+    } catch (error) {
+        return Response.json(
+            { message: "Invalid Token" },
+            { status: 401 }
+        );
+    }
+}
 
 // --------------------------------- //

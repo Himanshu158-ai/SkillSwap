@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/context/ToastContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata = {
   title: "Create Next App",
@@ -25,9 +26,11 @@ export default function RootLayout({ children }) {
     >
 
       <body suppressHydrationWarning={true} className="min-h-full flex flex-col ">
-        <ToastProvider>
+        <AuthProvider>  
+          <ToastProvider>
           {children}
         </ToastProvider>
+        </AuthProvider>
       </body>
     </html >
   );

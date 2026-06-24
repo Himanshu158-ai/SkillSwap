@@ -62,7 +62,7 @@ export default function UserProfile() {
             <nav className="sticky top-0 z-50 bg-[#0D0D0D]/90 backdrop-blur-xl border-b border-white/[0.07] px-4 sm:px-6 h-16 flex items-center">
                 <div>
                     <div className="text-[15px] font-medium text-white tracking-tight leading-none">SkillSwap</div>
-                    <div className="text-[11px] text-[#555] mt-0.5">User Profile</div>
+                    <div className="text-[11px] text-[#555] mt-0.5">To {user?.name}</div>
                 </div>
             </nav>
 
@@ -184,6 +184,9 @@ export default function UserProfile() {
                     >
                         Send request
                     </button>
+                    <p className="text-[12px] text-[#444] mt-4 leading-relaxed">
+                        The receiver can see your contact information before they accept your request.
+                    </p>
 
                 </div>
 

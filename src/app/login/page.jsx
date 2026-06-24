@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
 import Link from "next/link";
+import useAuth from "@/context/AuthContext";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,6 +13,7 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
+  const { setUser } = useAuth();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -36,6 +38,7 @@ export default function LoginPage() {
     console.log(data);
     if (data.success) {
       toast.success("Welcome back! Logging in...");
+      setUser(data.user);
       router.push("/discover");
     } else {
       toast.error(data.message || "Invalid credentials. Please try again.");
