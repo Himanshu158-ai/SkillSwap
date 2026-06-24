@@ -46,173 +46,161 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 py-8 overflow-hidden bg-[#F8FCFF]">
-
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#5465FF]/15 rounded-full blur-[120px]" />
-
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#9BB1FF]/30 rounded-full blur-[120px]" />
-
-      <div
-        className="
-  relative
-  z-10
-  w-full
-  max-w-md
-  bg-white/80
-  backdrop-blur-xl
-  border
-  border-white
-  rounded-[32px]
-  p-10
-  shadow-[0_20px_80px_rgba(84,101,255,0.15)]
-"
-      >
-
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-slate-900">
-            Create Account
-          </h1>
-          <p className="text-slate-500 mt-3">
-            Create your account and start learning today
-          </p>
+    <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4 py-16">
+ 
+      <div className="w-full max-w-sm bg-[#111] border border-white/[0.08] rounded-[20px] p-10">
+ 
+        {/* Logo */}
+        <div className="flex items-center gap-2 mb-8">
+          <span className="w-2 h-2 rounded-full bg-[#5465FF]" />
+          <span className="text-[#5465FF] text-[13px] font-medium tracking-wide">
+            SkillSwap
+          </span>
         </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-
+ 
+        {/* Heading */}
+        <h1 className="text-[26px] font-medium text-white tracking-tight mb-1.5">
+          Create account
+        </h1>
+        <p className="text-[13px] text-[#555] mb-8 leading-relaxed">
+          Start your learning journey today
+        </p>
+ 
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+ 
+          {/* Name */}
           <div>
-            <label className="block text-sm text-slate-700 font-medium mb-2">
+            <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
               Name
             </label>
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              className="
-w-full
-px-4
-py-4
-bg-white
-border
-border-slate-200
-rounded-2xl
-outline-none
-transition-all
-placeholder:text-slate-400
-focus:border-[#5465FF]
-focus:ring-4
-focus:ring-[#5465FF]/10
-"
-              required
-            />
+            <div className="relative">
+              <svg
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
+                width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="1.5"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+              </svg>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your full name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="
+                  w-full pl-10 pr-4 py-[11px]
+                  bg-[#0D0D0D] border border-white/10 rounded-[10px]
+                  text-[14px] text-[#E8E6E1] placeholder:text-[#444]
+                  outline-none transition-colors duration-200
+                  focus:border-[#5465FF]
+                "
+              />
+            </div>
           </div>
-
+ 
+          {/* Email */}
           <div>
-            <label className="block text-sm text-slate-700 font-medium mb-2">
+            <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
               Email
             </label>
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              className="
-w-full
-px-4
-py-4
-bg-white
-border
-border-slate-200
-rounded-2xl
-outline-none
-transition-all
-placeholder:text-slate-400
-focus:border-[#5465FF]
-focus:ring-4
-focus:ring-[#5465FF]/10
-"
-              required
-            />
+            <div className="relative">
+              <svg
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
+                width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="1.5"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="
+                  w-full pl-10 pr-4 py-[11px]
+                  bg-[#0D0D0D] border border-white/10 rounded-[10px]
+                  text-[14px] text-[#E8E6E1] placeholder:text-[#444]
+                  outline-none transition-colors duration-200
+                  focus:border-[#5465FF]
+                "
+              />
+            </div>
           </div>
-
+ 
+          {/* Password */}
           <div>
-            <label className="block text-sm text-slate-700 font-medium mb-2">
+            <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
               Password
             </label>
-
-            <input
-              type="password"
-              name="password"
-              placeholder="Create a password"
-              value={formData.password}
-              onChange={handleChange}
-              className="
-w-full
-px-4
-py-4
-bg-white
-border
-border-slate-200
-rounded-2xl
-outline-none
-transition-all
-placeholder:text-slate-400
-focus:border-[#5465FF]
-focus:ring-4
-focus:ring-[#5465FF]/10
-"
-              required
-            />
+            <div className="relative">
+              <svg
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
+                width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="1.5"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <input
+                type="password"
+                name="password"
+                placeholder="Min. 8 characters"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="
+                  w-full pl-10 pr-4 py-[11px]
+                  bg-[#0D0D0D] border border-white/10 rounded-[10px]
+                  text-[14px] text-[#E8E6E1] placeholder:text-[#444]
+                  outline-none transition-colors duration-200
+                  focus:border-[#5465FF]
+                "
+              />
+            </div>
+            <p className="text-[11px] text-[#444] mt-1.5">
+              Use at least 8 characters for better security.
+            </p>
           </div>
-          <p className="text-xs text-slate-500 mt-2">
-            Use at least 8 characters for better security.
-          </p>
-
+ 
+          {/* Submit */}
           <button
             type="submit"
             className="
-w-full
-py-4
-bg-[#5465FF]
-hover:bg-[#4354ee]
-text-white
-font-semibold
-rounded-2xl
-shadow-lg
-shadow-[#5465FF]/20
-transition-all
-cursor-pointer
-"
+              w-full py-3 mt-1
+              bg-[#5465FF] hover:bg-[#4354ee]
+              text-white text-[14px] font-medium
+              rounded-[10px] transition-colors duration-200 cursor-pointer
+            "
           >
-            Create Account
+            Create account
           </button>
-          <div className="flex items-center gap-4 my-6">
-
-            <div className="flex-1 h-px bg-slate-200" />
-
-            <span className="text-sm text-slate-400">
-              OR
-            </span>
-
-            <div className="flex-1 h-px bg-slate-200" />
-
-          </div>
+ 
         </form>
-
-
-        <p className="text-center text-slate-500 mt-8">
+ 
+        {/* Divider */}
+        <div className="flex items-center gap-3 my-6">
+          <div className="flex-1 h-px bg-white/[0.07]" />
+          <span className="text-[11px] text-[#444]">OR</span>
+          <div className="flex-1 h-px bg-white/[0.07]" />
+        </div>
+ 
+        {/* Login link */}
+        <p className="text-center text-[13px] text-[#555]">
           Already have an account?{" "}
-          <Link
-            href="/login"
-            className="text-[#5465FF] font-semibold hover:underline"
-          >
+          <Link href="/login" className="text-[#5465FF] hover:underline">
             Login
           </Link>
         </p>
+ 
       </div>
     </div>
   );

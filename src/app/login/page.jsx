@@ -44,134 +44,128 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden bg-[#F8FCFF]">
-
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#5465FF]/15 rounded-full blur-[120px]" />
-
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#9BB1FF]/30 rounded-full blur-[120px]" />
-
-      <div
-        className="
-  relative
-  z-10
-  w-full
-  max-w-md
-  bg-white/80
-  backdrop-blur-xl
-  border
-  border-white
-  rounded-[32px]
-  p-10
-  shadow-[0_20px_80px_rgba(84,101,255,0.15)]
-"
-      >
-
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-slate-900">
-            Welcome Back
-          </h1>
-
-          <p className="text-slate-500 mt-3">
-            Sign in to continue your learning journey
-          </p>
+    <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4 py-16">
+ 
+      <div className="w-full max-w-sm bg-[#111] border border-white/[0.08] rounded-[20px] p-10">
+ 
+        {/* Logo */}
+        <div className="flex items-center gap-2 mb-8">
+          <span className="w-2 h-2 rounded-full bg-[#5465FF]" />
+          <span className="text-[#5465FF] text-[13px] font-medium tracking-wide">
+            SkillSwap
+          </span>
         </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-
+ 
+        {/* Heading */}
+        <h1 className="text-[26px] font-medium text-white tracking-tight mb-1.5">
+          Welcome back
+        </h1>
+        <p className="text-[13px] text-[#555] mb-8 leading-relaxed">
+          Sign in to continue your learning journey
+        </p>
+ 
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+ 
+          {/* Email */}
           <div>
-            <label className="block text-sm text-slate-700 font-medium mb-2">
+            <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
               Email
             </label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              className="
-w-full
-px-4
-py-4
-bg-white
-border
-border-slate-200
-rounded-2xl
-outline-none
-transition-all
-placeholder:text-slate-400
-focus:border-[#5465FF]
-focus:ring-4
-focus:ring-[#5465FF]/10
-"
-            />
+            <div className="relative">
+              <svg
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
+                width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="1.5"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                className="
+                  w-full pl-10 pr-4 py-[11px]
+                  bg-[#0D0D0D] border border-white/10 rounded-[10px]
+                  text-[14px] text-[#E8E6E1] placeholder:text-[#444]
+                  outline-none transition-colors duration-200
+                  focus:border-[#5465FF]
+                "
+              />
+            </div>
           </div>
-
+ 
+          {/* Password */}
           <div>
-            <label className="block text-sm text-slate-700 font-medium mb-2">
+            <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
               Password
             </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              className="
-w-full
-px-4
-py-4
-bg-white
-border
-border-slate-200
-rounded-2xl
-outline-none
-transition-all
-placeholder:text-slate-400
-focus:border-[#5465FF]
-focus:ring-4
-focus:ring-[#5465FF]/10
-"
-            />
+            <div className="relative">
+              <svg
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
+                width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="1.5"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+                className="
+                  w-full pl-10 pr-4 py-[11px]
+                  bg-[#0D0D0D] border border-white/10 rounded-[10px]
+                  text-[14px] text-[#E8E6E1] placeholder:text-[#444]
+                  outline-none transition-colors duration-200
+                  focus:border-[#5465FF]
+                "
+              />
+            </div>
+            <a
+              href="#"
+              className="block text-right text-[12px] text-[#5465FF] mt-1.5 hover:underline"
+            >
+              Forgot password?
+            </a>
           </div>
-
+ 
+          {/* Submit */}
           <button
             type="submit"
             className="
-w-full
-py-4
-bg-[#5465FF]
-hover:bg-[#4354ee]
-text-white
-font-semibold
-rounded-2xl
-shadow-lg
-shadow-[#5465FF]/20
-transition-all
-cursor-pointer
-"
+              w-full py-3 mt-1
+              bg-[#5465FF] hover:bg-[#4354ee]
+              text-white text-[14px] font-medium
+              rounded-[10px] transition-colors duration-200 cursor-pointer
+            "
           >
-            Login
+            Sign in
           </button>
         </form>
-
-        <div className="flex items-center gap-4 my-6">
-
-          <div className="flex-1 h-px bg-slate-200" />
-
-          <span className="text-sm text-slate-400">
-            OR
-          </span>
-
-          <div className="flex-1 h-px bg-slate-200" />
-
+ 
+        {/* Divider */}
+        <div className="flex items-center gap-3 my-6">
+          <div className="flex-1 h-px bg-white/[0.07]" />
+          <span className="text-[11px] text-[#444]">OR</span>
+          <div className="flex-1 h-px bg-white/[0.07]" />
         </div>
-
-        <p className="text-center text-slate-400 mt-6">
+ 
+        {/* Register link */}
+        <p className="text-center text-[13px] text-[#555]">
           Don't have an account?{" "}
-          <Link href={"/register"} className="text-green-400 cursor-pointer hover:underline">
+          <Link href="/register" className="text-[#5465FF] hover:underline">
             Register
           </Link>
         </p>
+ 
       </div>
     </div>
   );
