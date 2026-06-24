@@ -5,6 +5,19 @@
   --foreground: #171717;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f8fcff;
+}
+
+::selection {
+  background: #5465ff;
+  color: white;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

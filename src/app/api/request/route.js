@@ -20,7 +20,7 @@ export async function GET() {
             return NextResponse.json({ success: false, message: "Unauthorized!" }, { status: 401 });
         }
 
-        const requests = await Request.find({ receiverId: userId }).populate("senderId", "name email phone bio location canTeach wantsToLearn").select("-password");
+        const requests = await Request.find({ receiverId: userId, status: {$ne : "rejected"} }).populate("senderId", "name email phone bio location canTeach wantsToLearn").select("-password");
 
         return NextResponse.json(
             { success: true, requests },

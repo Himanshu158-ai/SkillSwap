@@ -20,6 +20,31 @@ const ReceiveRequestPage = () => {
             setRequests(data.requests);
         }
     };
+
+
+    const handelAccept = async(id)=>{
+        console.log(id);
+        const res = await fetch(`/api/action/accept/${id}`,{
+            method:"POST",
+        });
+        const data = await res.json();
+        if(data.success){
+            console.log("request accepted",data);
+            fetchRequests();
+        }
+    }
+
+    const handelReject = async(id)=>{
+        const res = await fetch(`/api/action/reject/${id}`,{
+            method:"POST",
+        });
+        const data = await res.json();
+        if(data.success){
+            console.log("request rejected",data);
+            fetchRequests();
+        }
+    }
+
     return (
         <>
             {
@@ -116,12 +141,18 @@ const ReceiveRequestPage = () => {
 
                             <button
                                 className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg"
+                                onClick={()=>{
+                                    handelAccept(request._id);
+                                }}
                             >
                                 Accept
                             </button>
 
                             <button
                                 className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg"
+                                onClick={()=>{
+                                    handelReject(request._id);
+                                }}
                             >
                                 Reject
                             </button>
