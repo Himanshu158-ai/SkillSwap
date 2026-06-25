@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import useAuth from "@/context/AuthContext";
+import { useToast } from "@/context/ToastContext";
 
 export default function DiscoverPage() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
   const { user, loading } = useAuth();
+  const toast = useToast();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -23,11 +25,18 @@ export default function DiscoverPage() {
   }, [user]);
 
   const fetchUsers = async () => {
-    const res = await fetch("/api/users");
-    const data = await res.json();
+    try {
+      const res = await fetch("/api/users");
+      const data = await res.json();
 
-    if (data.success) {
-      setUsers(data.users);
+      if (data.success) {
+        setUsers(data.users);
+      } else {
+        toast.error(data.message || "Failed to load users.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch users.");
     }
   };
 
@@ -123,7 +132,7 @@ export default function DiscoverPage() {
             </svg>
             <input
               type="text"
-              placeholder="Search by name or skill..."
+              placeholder="Search by skills..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="
@@ -160,8 +169,8 @@ export default function DiscoverPage() {
                     {user.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                   </div>
                   <div className="min-w-0">
-                    <h2 className="text-[15px] font-medium text-white truncate">{user.name}</h2>
-                    <p className="text-[12px] text-[#555] flex items-center gap-1 mt-0.5">
+                    <h2 className="text-[15px] font-medium text-white truncate capitalize">{user.name}</h2>
+                    <p className="text-[12px] text-[#555] flex items-center gap-1 mt-0.5 capitalize">
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
                       </svg>

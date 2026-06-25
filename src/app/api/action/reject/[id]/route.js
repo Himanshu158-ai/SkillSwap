@@ -24,17 +24,11 @@ export async function POST(request, { params }) {
             return NextResponse.json({ success: false, message: "Unauthorized!" }, { status: 401 });
         }
 
-        const request = await Request.findById(id);
+        const request = await Request.findOneAndDelete({_id:id});
+
         if (!request) {
             return NextResponse.json({ success: false, message: "Request not found!" }, { status: 404 });
         }
-
-        if (request.receiverId.toString() !== userId) {
-            return NextResponse.json({ success: false, message: "Unauthorized!" }, { status: 401 });
-        }
-
-        request.status = "rejected";
-        await request.save();
 
         return NextResponse.json({ success: true, message: "Request rejected successfully!" }, { status: 200 });
     } catch (error) {

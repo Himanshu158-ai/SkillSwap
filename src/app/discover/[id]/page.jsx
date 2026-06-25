@@ -3,44 +3,85 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useToast } from "@/context/ToastContext";
+import useAuth from "@/context/AuthContext";
 
 export default function UserProfile() {
     const { id } = useParams();
     const toast = useToast();
 
-    const [user, setUser] = useState(null);
+    const [userr, setUserr] = useState(null);
+    const [isAlready, setIsAlready] = useState([]);
+
 
     useEffect(() => {
         fetchUser();
     }, []);
 
-    const fetchUser = async () => {
-        const res = await fetch(`/api/users/${id}`);
-        const data = await res.json();
+    useEffect(() => {
+        console.log("ID IS HERE");
+        console.log(id);
+        fetchRequests();
+    }, [id]);
 
-        if (data.success) {
-            setUser(data.user);
+    const fetchUser = async () => {
+        try {
+            const res = await fetch(`/api/users/${id}`);
+            const data = await res.json();
+
+            if (data.success) {
+                setUserr(data.user);
+            } else {
+                toast.error(data.message || "Failed to load user profile.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to fetch user profile.");
         }
     };
 
     const handelRequest = async (receiverId) => {
-        const res = await fetch("/api/request/send", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ receiverId }),
-        });
-        const data = await res.json();
+        try {
+            const res = await fetch("/api/request/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ receiverId }),
+            });
+            const data = await res.json();
 
-        if (data.success) {
-            toast.success(data.message);
-        } else {
-            toast.error(data.message || "Failed to send request.");
+            if (data.success) {
+                toast.success(data.message);
+            } else {
+                toast.error(data.message || "Failed to send request.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("An error occurred while sending connection request.");
         }
     }
 
-    if (!user) {
+    const fetchRequests = async () => {
+        try {
+            const res = await fetch(`/api/request/send/${id}`, {
+                method: "GET",
+            });
+            const data = await res.json();
+            console.log(data.requests);
+
+            if (data.success) {
+                setIsAlready(data.requests);
+            } else {
+                toast.error(data.message || "Failed to check request status.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Failed to fetch request status.");
+        }
+    };
+
+
+    if (!userr) {
         return (
             <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4">
@@ -62,7 +103,7 @@ export default function UserProfile() {
             <nav className="sticky top-0 z-50 bg-[#0D0D0D]/90 backdrop-blur-xl border-b border-white/[0.07] px-4 sm:px-6 h-16 flex items-center">
                 <div>
                     <div className="text-[15px] font-medium text-white tracking-tight leading-none">SkillSwap</div>
-                    <div className="text-[11px] text-[#555] mt-0.5">To {user?.name}</div>
+                    <div className="text-[11px] text-[#555] mt-0.5">To {userr?.name}</div>
                 </div>
             </nav>
 
@@ -74,24 +115,24 @@ export default function UserProfile() {
                     <div className="flex items-start gap-4">
                         {/* Avatar */}
                         <div className="w-12 h-12 rounded-full bg-[#5465FF]/15 border border-[#5465FF]/20 flex items-center justify-center text-[#8B97FF] text-[14px] font-medium shrink-0">
-                            {user?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                            {userr?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                         </div>
 
                         <div className="min-w-0">
                             <h1 className="text-[22px] font-medium text-white tracking-tight leading-tight">
-                                {user?.name}
+                                {userr?.name}
                             </h1>
                             <p className="text-[12px] text-[#555] flex items-center gap-1 mt-1">
                                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
                                 </svg>
-                                {user?.location}
+                                {userr?.location}
                             </p>
                         </div>
                     </div>
 
                     <p className="text-[13px] text-[#666] leading-relaxed mt-5">
-                        {user?.bio}
+                        {userr?.bio}
                     </p>
 
                 </div>
@@ -105,7 +146,7 @@ export default function UserProfile() {
                             Can teach
                         </p>
                         <div className="flex flex-wrap gap-1.5">
-                            {user?.canTeach?.map((skill) => (
+                            {userr?.canTeach?.map((skill) => (
                                 <span
                                     key={skill}
                                     className="px-2.5 py-1 bg-[#5465FF]/10 border border-[#5465FF]/15 text-[#8B97FF] rounded-full text-[11px]"
@@ -122,7 +163,7 @@ export default function UserProfile() {
                             Wants to learn
                         </p>
                         <div className="flex flex-wrap gap-1.5">
-                            {user?.wantsToLearn?.map((skill) => (
+                            {userr?.wantsToLearn?.map((skill) => (
                                 <span
                                     key={skill}
                                     className="px-2.5 py-1 bg-white/[0.04] border border-white/[0.08] text-[#777] rounded-full text-[11px]"
@@ -174,15 +215,21 @@ export default function UserProfile() {
                     <div className="h-px bg-white/[0.06] my-5" />
 
                     <button
-                        onClick={() => handelRequest(user._id)}
-                        className="
-              w-full py-3
-              bg-[#5465FF] hover:bg-[#4354ee]
-              text-white text-[14px] font-medium
-              rounded-[10px] transition-colors duration-200 cursor-pointer
-            "
+                        onClick={() => handelRequest(userr._id)}
+                        disabled={isAlready.length > 0}
+                        className={`
+    w-full py-3
+    text-[14px] font-medium
+    rounded-[10px] transition-colors duration-200
+    ${isAlready.length > 0
+                                ? "bg-green-400 text-black cursor-not-allowed opacity-80"
+                                : "bg-[#5465FF] hover:bg-[#4354ee] text-white cursor-pointer"
+                            }
+  `}
                     >
-                        Send request
+                        {isAlready.length > 0
+                            ? "Already sent a request!"
+                            : "Send request"}
                     </button>
                     <p className="text-[12px] text-[#444] mt-4 leading-relaxed">
                         The receiver can see your contact information before they accept your request.

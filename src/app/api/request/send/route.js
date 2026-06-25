@@ -49,7 +49,7 @@ export async function POST(request) {
 
         if (existingRequest) {
             return NextResponse.json(
-                { success: false, message: "Request already sent!" },
+                { success: false, message: "Request is already in your inbox!" },
                 { status: 400 }
             );
         }
@@ -91,6 +91,8 @@ export async function GET() {
         if (!userId) {
             return NextResponse.json({ success: false, message: "Unauthorized!" }, { status: 401 });
         }
+
+        console.log(userId);
 
         const requests = await Request.find({ senderId: userId }).populate("receiverId", "name email phone bio location canTeach wantsToLearn").select("-password");
 

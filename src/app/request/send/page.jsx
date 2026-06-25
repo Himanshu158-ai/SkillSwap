@@ -1,20 +1,30 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useToast } from "@/context/ToastContext";
 
 export default function SentRequestsPage() {
   const [requests, setRequests] = useState([]);
+  const toast = useToast();
 
   useEffect(() => {
     fetchRequests();
   }, []);
 
   const fetchRequests = async () => {
-    const res = await fetch("/api/request/send");
-    const data = await res.json();
+    try {
+      const res = await fetch("/api/request/send");
+      const data = await res.json();
+      console.log(data);
 
-    if (data.success) {
-      setRequests(data.requests);
+      if (data.success) {
+        setRequests(data.requests);
+      } else {
+        toast.error(data.message || "Failed to load sent requests.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to fetch sent requests.");
     }
   };
 
@@ -22,11 +32,23 @@ export default function SentRequestsPage() {
      <div className="min-h-screen bg-[#0D0D0D] text-[#E8E6E1]">
  
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 bg-[#0D0D0D]/90 backdrop-blur-xl border-b border-white/[0.07] px-4 sm:px-6 h-16 flex items-center">
+      <nav className="sticky top-0 z-50 bg-[#0D0D0D]/90 backdrop-blur-xl border-b border-white/[0.07] px-4 sm:px-6 h-16 flex items-center justify-between">
         <div>
           <div className="text-[15px] font-medium text-white tracking-tight leading-none">SkillSwap</div>
           <div className="text-[11px] text-[#555] mt-0.5">Your Sent Requests</div>
         </div>
+        <button
+                    onClick={() => router.push("/discover")}
+                    className="
+                      px-3 sm:px-4 py-2 rounded-[8px]
+                      bg-transparent border border-white/10 text-[#999]
+                      text-[12px] sm:text-[13px] font-medium
+                      hover:border-white/20 hover:text-white
+                      transition-colors duration-200 cursor-pointer
+                    "
+                >
+                    Back to Discover
+                </button>
       </nav>
  
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
