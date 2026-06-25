@@ -114,15 +114,15 @@ export default function UserProfile() {
 
                     <div className="flex items-start gap-4">
                         {/* Avatar */}
-                        <div className="w-12 h-12 rounded-full bg-[#5465FF]/15 border border-[#5465FF]/20 flex items-center justify-center text-[#8B97FF] text-[14px] font-medium shrink-0">
+                        <div className="w-[52px] h-[52px] rounded-full bg-[#5465FF]/15 border border-[#5465FF]/20 flex items-center justify-center text-[#8B97FF] text-[25px] font-medium shrink-0 capitalize">
                             {userr?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                         </div>
 
                         <div className="min-w-0">
-                            <h1 className="text-[22px] font-medium text-white tracking-tight leading-tight">
+                            <h1 className="text-[22px] font-medium text-white tracking-tight leading-tight capitalize">
                                 {userr?.name}
                             </h1>
-                            <p className="text-[12px] text-[#555] flex items-center gap-1 mt-1">
+                            <p className="text-[12px] text-[#555] flex items-center gap-1 mt-1 capitalize">
                                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
                                 </svg>
@@ -138,7 +138,8 @@ export default function UserProfile() {
                 </div>
 
                 {/* Skills grid */}
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid gap-3"
+                    style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))" }}>
 
                     {/* Can Teach */}
                     <div className="bg-[#111] border border-white/[0.08] rounded-[16px] p-5">
@@ -222,7 +223,7 @@ export default function UserProfile() {
     text-[14px] font-medium
     rounded-[10px] transition-colors duration-200
     ${isAlready.length > 0
-                                ? "bg-green-400 text-black cursor-not-allowed opacity-80"
+                                ? "bg-green-400/10 border border-green-400/20 text-green-400 cursor-not-allowed"
                                 : "bg-[#5465FF] hover:bg-[#4354ee] text-white cursor-pointer"
                             }
   `}

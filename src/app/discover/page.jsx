@@ -71,15 +71,15 @@ export default function DiscoverPage() {
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-[#E8E6E1]">
- 
+
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-[#0D0D0D]/90 backdrop-blur-xl border-b border-white/[0.07] px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
- 
+
         <div>
           <div className="text-[15px] font-medium text-white tracking-tight leading-none">SkillSwap</div>
           <div className="text-[11px] text-[#555] mt-0.5">Discover & Connect</div>
         </div>
- 
+
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={() => router.push("/request/send")}
@@ -91,7 +91,8 @@ export default function DiscoverPage() {
               transition-colors duration-200 cursor-pointer
             "
           >
-            <span className="hidden sm:inline">Outbox </span>
+            {/* <span className="hidden sm:inline">Outbox </span> */}
+            Outbox
           </button>
           <button
             onClick={() => router.push("/request/receive")}
@@ -102,15 +103,16 @@ export default function DiscoverPage() {
               transition-colors duration-200 cursor-pointer
             "
           >
-            <span className="hidden sm:inline">Inbox </span>
+            {/* <span className="hidden sm:inline">Inbox </span> */}
+            Inbox
           </button>
         </div>
- 
+
       </nav>
- 
+
       {/* Main */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
- 
+
         {/* Page header + search */}
         <div className="mb-10">
           <h1 className="text-[28px] sm:text-[34px] font-medium text-white tracking-tight leading-tight mb-1">
@@ -119,7 +121,7 @@ export default function DiscoverPage() {
           <p className="text-[13px] text-[#555] mb-4">
             Find people who can teach what you want to learn.
           </p>
- 
+
           <div className="relative">
             <svg
               className="absolute left-4 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
@@ -136,7 +138,7 @@ export default function DiscoverPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="
-                w-full pl-11 pr-4 py-[11px]
+                w-full pl-11 pr-4 py-[13px]
                 bg-[#111] border border-white/[0.08] rounded-[10px]
                 text-[14px] text-[#E8E6E1] placeholder:text-[#444]
                 outline-none transition-colors duration-200
@@ -145,20 +147,22 @@ export default function DiscoverPage() {
             />
           </div>
         </div>
- 
+
         {/* Results count */}
         <p className="text-[12px] text-[#444] mb-5">
           {filteredUsers.length} {filteredUsers.length === 1 ? "user" : "users"} found
         </p>
- 
+
         {/* User grid */}
         {filteredUsers.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid gap-3"
+            style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))" }}
+          >
             {filteredUsers.map((user) => (
               <div
                 key={user._id}
                 className="
-                  bg-[#111] border border-white/[0.08] rounded-[16px] p-6
+                  bg-[#111] border border-white/[0.08] rounded-[16px] p-4 sm:p-6
                   flex flex-col gap-5
                   hover:border-white/[0.14] transition-colors duration-200
                 "
@@ -178,15 +182,15 @@ export default function DiscoverPage() {
                     </p>
                   </div>
                 </div>
- 
+
                 {/* Bio */}
                 <p className="text-[13px] text-[#666] leading-relaxed line-clamp-3">
                   {user.bio}
                 </p>
- 
+
                 {/* Skills */}
                 <div className="space-y-3">
- 
+
                   <div>
                     <p className="text-[11px] text-[#5465FF] font-medium tracking-wide uppercase mb-2">
                       Can teach
@@ -202,7 +206,7 @@ export default function DiscoverPage() {
                       ))}
                     </div>
                   </div>
- 
+
                   <div>
                     <p className="text-[11px] text-[#666] font-medium tracking-wide uppercase mb-2">
                       Wants to learn
@@ -218,9 +222,9 @@ export default function DiscoverPage() {
                       ))}
                     </div>
                   </div>
- 
+
                 </div>
- 
+
                 {/* CTA */}
                 <button
                   onClick={() => viewDetail(user._id)}
@@ -233,7 +237,7 @@ export default function DiscoverPage() {
                 >
                   View profile
                 </button>
- 
+
               </div>
             ))}
           </div>
@@ -243,7 +247,7 @@ export default function DiscoverPage() {
             <p className="text-[#333] text-[12px] mt-1">Try a different skill or name</p>
           </div>
         )}
- 
+
       </main>
     </div>
   );
