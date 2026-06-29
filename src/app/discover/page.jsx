@@ -9,7 +9,7 @@ export default function DiscoverPage() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
-  const { user, loading } = useAuth();
+  const { user, loading, setUser } = useAuth();
   const toast = useToast();
 
   useEffect(() => {
@@ -40,6 +40,22 @@ export default function DiscoverPage() {
     }
   };
 
+  const logOut = async() =>{
+    try {
+      const res = await fetch("/api/auth/logout");
+      const data = await res.json();
+      console.log(data);
+      if (data.success) {
+        toast.success(data.message);
+        router.push("/");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to logout.");
+    }
+  }
 
   const filteredUsers = users.filter((user) => {
     if (!searchTerm.trim()) return true;
@@ -105,6 +121,17 @@ export default function DiscoverPage() {
           >
             {/* <span className="hidden sm:inline">Inbox </span> */}
             Inbox
+          </button>
+          <button
+            onClick={logOut}
+            className="
+              px-3 sm:px-4 py-2 rounded-[8px]
+              bg-red-500 hover:bg-red-600 text-white
+              text-[12px] sm:text-[13px] font-medium
+              transition-colors duration-200 cursor-pointer
+            "
+          >
+            Logout
           </button>
         </div>
 
