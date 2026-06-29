@@ -43,42 +43,43 @@ export default function LoginPage() {
     } else {
       toast.error(data.message || "Invalid credentials. Please try again.");
     }
-
   };
 
   return (
-    <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4 py-16">
- 
-      <div className="w-full max-w-sm bg-[#111] border border-white/[0.08] rounded-[20px] p-10">
- 
+    <div
+      className="min-h-screen bg-[#1B1612] flex items-center justify-center px-4 py-16"
+      style={{ fontFamily: "'Geist', 'Inter', 'Manrope', sans-serif" }}
+    >
+      <div className="w-full max-w-sm bg-[#241D18] border border-white/[0.07] rounded-2xl p-9 shadow-[0_8px_40px_rgba(0,0,0,0.45)]">
+
         {/* Logo */}
-        <div className="flex items-center gap-2 mb-8">
-          <span className="w-2 h-2 rounded-full bg-[#5465FF]" />
-          <span className="text-[#5465FF] text-[13px] font-medium tracking-wide">
+        <div className="flex items-center gap-2 mb-9">
+          <span className="w-[7px] h-[7px] rounded-full bg-[#B68D5A]" />
+          <span className="text-[#B68D5A] text-[13px] font-semibold tracking-wide">
             SkillSwap
           </span>
         </div>
- 
+
         {/* Heading */}
-        <h1 className="text-[26px] font-medium text-white tracking-tight mb-1.5">
+        <h1 className="text-[26px] font-bold text-[#F6F3EE] tracking-[-0.8px] mb-1.5">
           Welcome back
         </h1>
-        <p className="text-[13px] text-[#555] mb-8 leading-relaxed">
+        <p className="text-[13px] text-[#7F776E] mb-8 leading-relaxed">
           Sign in to continue your learning journey
         </p>
- 
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
- 
+
           {/* Email */}
           <div>
-            <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
+            <label className="block text-[11px] font-medium text-[#9D9489] tracking-[0.5px] uppercase mb-2">
               Email
             </label>
             <div className="relative">
               <svg
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
-                width="16" height="16" viewBox="0 0 24 24"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#6B655F] pointer-events-none"
+                width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" strokeWidth="1.5"
                 strokeLinecap="round" strokeLinejoin="round"
               >
@@ -93,24 +94,24 @@ export default function LoginPage() {
                 onChange={handleChange}
                 className="
                   w-full pl-10 pr-4 py-[11px]
-                  bg-[#0D0D0D] border border-white/10 rounded-[10px]
-                  text-[14px] text-[#E8E6E1] placeholder:text-[#444]
-                  outline-none transition-colors duration-200
-                  focus:border-[#5465FF]
+                  bg-[#1B1612] border border-white/[0.08] rounded-xl
+                  text-[14px] text-[#F6F3EE] placeholder:text-[#6B655F]
+                  outline-none transition-all duration-200
+                  focus:border-[#B68D5A]/50 focus:bg-[#1B1612]
                 "
               />
             </div>
           </div>
- 
+
           {/* Password */}
           <div>
-            <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
+            <label className="block text-[11px] font-medium text-[#9D9489] tracking-[0.5px] uppercase mb-2">
               Password
             </label>
             <div className="relative">
               <svg
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
-                width="16" height="16" viewBox="0 0 24 24"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#6B655F] pointer-events-none"
+                width="15" height="15" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" strokeWidth="1.5"
                 strokeLinecap="round" strokeLinejoin="round"
               >
@@ -125,50 +126,53 @@ export default function LoginPage() {
                 onChange={handleChange}
                 className="
                   w-full pl-10 pr-4 py-[11px]
-                  bg-[#0D0D0D] border border-white/10 rounded-[10px]
-                  text-[14px] text-[#E8E6E1] placeholder:text-[#444]
-                  outline-none transition-colors duration-200
-                  focus:border-[#5465FF]
+                  bg-[#1B1612] border border-white/[0.08] rounded-xl
+                  text-[14px] text-[#F6F3EE] placeholder:text-[#6B655F]
+                  outline-none transition-all duration-200
+                  focus:border-[#B68D5A]/50
                 "
               />
             </div>
-            <a
-              href="#"
-              className="block text-right text-[12px] text-[#5465FF] mt-1.5 hover:underline"
-            >
-              Forgot password?
-            </a>
+            <div className="flex justify-end mt-2">
+              <a
+                href="#"
+                className="text-[12px] text-[#9D9489] hover:text-[#D6B37A] transition-colors duration-150"
+              >
+                Forgot password?
+              </a>
+            </div>
           </div>
- 
+
           {/* Submit */}
           <button
             type="submit"
             className="
-              w-full py-3 mt-1
-              bg-[#5465FF] hover:bg-[#4354ee]
-              text-white text-[14px] font-medium
-              rounded-[10px] transition-colors duration-200 cursor-pointer
+              w-full py-[11px] mt-1
+              bg-[#B68D5A] hover:bg-[#C9A06A]
+              text-[#1B1612] text-[14px] font-semibold
+              rounded-xl transition-all duration-200 cursor-pointer
+              active:scale-[0.98]
             "
           >
             Sign in
           </button>
         </form>
- 
+
         {/* Divider */}
-        <div className="flex items-center gap-3 my-6">
-          <div className="flex-1 h-px bg-white/[0.07]" />
-          <span className="text-[11px] text-[#444]">OR</span>
-          <div className="flex-1 h-px bg-white/[0.07]" />
+        <div className="flex items-center gap-3 my-7">
+          <div className="flex-1 h-px bg-white/[0.06]" />
+          <span className="text-[11px] text-[#6B655F] tracking-[0.5px]">OR</span>
+          <div className="flex-1 h-px bg-white/[0.06]" />
         </div>
- 
+
         {/* Register link */}
-        <p className="text-center text-[13px] text-[#555]">
+        <p className="text-center text-[13px] text-[#7F776E]">
           Don't have an account?{" "}
-          <Link href="/register" className="text-[#5465FF] hover:underline">
+          <Link href="/register" className="text-[#D6B37A] hover:text-[#F6F3EE] transition-colors duration-150 font-medium">
             Register
           </Link>
         </p>
- 
+
       </div>
     </div>
   );

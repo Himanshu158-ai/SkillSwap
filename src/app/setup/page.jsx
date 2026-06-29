@@ -57,50 +57,53 @@ export default function ProfileSetupPage() {
     } else {
       toast.error(data.message || "Profile setup failed. Please try again.");
     }
-
-
   };
 
   const inputClass = `
     w-full pl-10 pr-4 py-[11px]
-    bg-[#0D0D0D] border border-white/10 rounded-[10px]
-    text-[14px] text-[#E8E6E1] placeholder:text-[#444]
-    outline-none transition-colors duration-200
-    focus:border-[#5465FF]
+    bg-[#1B1612] border border-white/[0.08] rounded-xl
+    text-[14px] text-[#F6F3EE] placeholder:text-[#6B655F]
+    outline-none transition-all duration-200
+    focus:border-[#B68D5A]/50
   `;
 
-    const inputClassNoIcon = `
+  const inputClassNoIcon = `
     w-full px-4 py-[11px]
-    bg-[#0D0D0D] border border-white/10 rounded-[10px]
-    text-[14px] text-[#E8E6E1] placeholder:text-[#444]
-    outline-none transition-colors duration-200
-    focus:border-[#5465FF]
+    bg-[#1B1612] border border-white/[0.08] rounded-xl
+    text-[14px] text-[#F6F3EE] placeholder:text-[#6B655F]
+    outline-none transition-all duration-200
+    focus:border-[#B68D5A]/50
   `;
 
   return (
-    <div className="min-h-screen bg-[#0D0D0D] py-16 px-4">
+    <div
+      className="min-h-screen bg-[#1B1612] py-16 px-4"
+      style={{ fontFamily: "'Geist', 'Inter', 'Manrope', sans-serif" }}
+    >
       <div className="max-w-2xl mx-auto">
-
-        <div className="bg-[#111] border border-white/[0.08] rounded-[20px] p-10">
+        <div className="bg-[#241D18] border border-white/[0.07] rounded-2xl p-9 shadow-[0_8px_40px_rgba(0,0,0,0.45)]">
 
           {/* Header */}
           <div className="mb-10">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#5465FF]" />
-              <span className="text-[#5465FF] text-[13px] font-medium tracking-wide">
+
+            {/* Logo */}
+            <div className="flex items-center gap-2 mb-7">
+              <span className="w-[7px] h-[7px] rounded-full bg-[#B68D5A]" />
+              <span className="text-[#B68D5A] text-[13px] font-semibold tracking-wide">
                 SkillSwap
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-2 bg-[#5465FF]/10 border border-[#5465FF]/20 text-[#8B97FF] px-4 py-1.5 rounded-full text-[12px] font-medium mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#5465FF]" />
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-[#B68D5A]/10 border border-[#B68D5A]/20 text-[#D6B37A] px-4 py-1.5 rounded-full text-[11px] font-medium mb-5 tracking-[0.2px]">
+              <span className="w-[5px] h-[5px] rounded-full bg-[#B68D5A]" />
               Complete your profile
             </div>
 
-            <h1 className="text-[26px] font-medium text-white tracking-tight mb-1.5">
+            <h1 className="text-[26px] font-bold text-[#F6F3EE] tracking-[-0.8px] mb-1.5">
               Let's build your profile
             </h1>
-            <p className="text-[13px] text-[#555] leading-relaxed">
+            <p className="text-[13px] text-[#7F776E] leading-relaxed">
               Tell the community what you can teach and what you want to learn.
             </p>
           </div>
@@ -110,13 +113,13 @@ export default function ProfileSetupPage() {
 
             {/* Phone */}
             <div>
-              <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
+              <label className="block text-[11px] font-medium text-[#9D9489] tracking-[0.5px] uppercase mb-2">
                 Phone number
               </label>
               <div className="relative">
                 <svg
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
-                  width="16" height="16" viewBox="0 0 24 24"
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#6B655F] pointer-events-none"
+                  width="15" height="15" viewBox="0 0 24 24"
                   fill="none" stroke="currentColor" strokeWidth="1.5"
                   strokeLinecap="round" strokeLinejoin="round"
                 >
@@ -135,13 +138,13 @@ export default function ProfileSetupPage() {
 
             {/* Location */}
             <div>
-              <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
+              <label className="block text-[11px] font-medium text-[#9D9489] tracking-[0.5px] uppercase mb-2">
                 Location
               </label>
               <div className="relative">
                 <svg
-                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#444] pointer-events-none"
-                  width="16" height="16" viewBox="0 0 24 24"
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#6B655F] pointer-events-none"
+                  width="15" height="15" viewBox="0 0 24 24"
                   fill="none" stroke="currentColor" strokeWidth="1.5"
                   strokeLinecap="round" strokeLinejoin="round"
                 >
@@ -161,7 +164,7 @@ export default function ProfileSetupPage() {
 
             {/* Bio */}
             <div>
-              <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
+              <label className="block text-[11px] font-medium text-[#9D9489] tracking-[0.5px] uppercase mb-2">
                 About you
               </label>
               <textarea
@@ -179,7 +182,7 @@ export default function ProfileSetupPage() {
 
               {/* Can Teach */}
               <div>
-                <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
+                <label className="block text-[11px] font-medium text-[#9D9489] tracking-[0.5px] uppercase mb-2">
                   Skills you can teach
                 </label>
                 <input
@@ -190,14 +193,14 @@ export default function ProfileSetupPage() {
                   onChange={handleChange}
                   className={inputClassNoIcon}
                 />
-                <p className="text-[11px] text-[#444] mt-1.5">
+                <p className="text-[11px] text-[#6B655F] mt-2">
                   Separate multiple skills with commas.
                 </p>
               </div>
 
               {/* Wants to Learn */}
               <div>
-                <label className="block text-[12px] text-[#666] tracking-wide mb-1.5">
+                <label className="block text-[11px] font-medium text-[#9D9489] tracking-[0.5px] uppercase mb-2">
                   Skills you want to learn
                 </label>
                 <input
@@ -208,7 +211,7 @@ export default function ProfileSetupPage() {
                   onChange={handleChange}
                   className={inputClassNoIcon}
                 />
-                <p className="text-[11px] text-[#444] mt-1.5">
+                <p className="text-[11px] text-[#6B655F] mt-2">
                   Add skills you are interested in learning.
                 </p>
               </div>
@@ -216,16 +219,17 @@ export default function ProfileSetupPage() {
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-white/[0.07] my-2" />
+            <div className="h-px bg-white/[0.06] my-1" />
 
             {/* Submit */}
             <button
               type="submit"
               className="
-                w-full py-3
-                bg-[#5465FF] hover:bg-[#4354ee]
-                text-white text-[14px] font-medium
-                rounded-[10px] transition-colors duration-200 cursor-pointer
+                w-full py-[11px]
+                bg-[#B68D5A] hover:bg-[#C9A06A]
+                text-[#1B1612] text-[14px] font-semibold
+                rounded-xl transition-all duration-200 cursor-pointer
+                active:scale-[0.98]
               "
             >
               Complete profile
@@ -236,6 +240,5 @@ export default function ProfileSetupPage() {
         </div>
       </div>
     </div>
-
   );
 }
