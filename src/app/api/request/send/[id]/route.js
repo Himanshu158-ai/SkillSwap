@@ -18,8 +18,12 @@ export async function GET(request, { params }) {
         const userId = decodedToken.userId;
 
 
-        const requests = await Request.find({ receiverId: id, senderId: userId })
-        return NextResponse.json({ success: true, requests });
+        const requests = await Request.findOne({ receiverId: id, senderId: userId })
+        if (requests) {
+            return NextResponse.json({ success: true });
+        }
+        
+        return NextResponse.json({ success: false });
     } catch (error) {
         return NextResponse.json({ success: false, message: "Failed to fetch requests" }, { status: 500 });
     }

@@ -10,7 +10,7 @@ export default function UserProfile() {
     const toast = useToast();
 
     const [userr, setUserr] = useState(null);
-    const [isAlready, setIsAlready] = useState([]);
+    const [isAlready, setIsAlready] = useState(false);
 
 
     useEffect(() => {
@@ -18,8 +18,6 @@ export default function UserProfile() {
     }, []);
 
     useEffect(() => {
-        console.log("ID IS HERE");
-        console.log(id);
         fetchRequests();
     }, [id]);
 
@@ -52,6 +50,8 @@ export default function UserProfile() {
 
             if (data.success) {
                 toast.success(data.message);
+                setIsAlready(true);
+
             } else {
                 toast.error(data.message || "Failed to send request.");
             }
@@ -67,13 +67,13 @@ export default function UserProfile() {
                 method: "GET",
             });
             const data = await res.json();
-            console.log(data.requests);
+            console.log(data);
 
             if (data.success) {
-                setIsAlready(data.requests);
-            } else {
-                toast.error(data.message || "Failed to check request status.");
+                setIsAlready(true);
+                return;
             }
+            setIsAlready(false);
         } catch (error) {
             console.error(error);
             toast.error("Failed to fetch request status.");
@@ -217,18 +217,18 @@ export default function UserProfile() {
 
                     <button
                         onClick={() => handelRequest(userr._id)}
-                        disabled={isAlready.length > 0}
+                        disabled={isAlready}
                         className={`
     w-full py-3
     text-[14px] font-medium
     rounded-[10px] transition-colors duration-200
-    ${isAlready.length > 0
+    ${isAlready
                                 ? "bg-green-400/10 border border-green-400/20 text-green-400 cursor-not-allowed"
                                 : "bg-[#5465FF] hover:bg-[#4354ee] text-white cursor-pointer"
                             }
   `}
                     >
-                        {isAlready.length > 0
+                        {isAlready
                             ? "Already sent a request!"
                             : "Send request"}
                     </button>
