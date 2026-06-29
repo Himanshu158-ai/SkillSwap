@@ -18,6 +18,13 @@ export async function POST(request) {
             );
         }
 
+        if (password.length < 8 || password.length > 16) {
+            return NextResponse.json(
+                { message: "Password must be between 8 and 16 characters" },
+                { status: 400 }
+            );
+        }
+
         const hashedPassword = await bcryptjs.hash(password, 10);
 
         const newUser = new User({

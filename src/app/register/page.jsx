@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
 import Link from "next/link";
+import useAuth from "@/context/AuthContext";
 
 export default function RegisterPage() {
+  const {setUser} = useAuth();
   const router = useRouter();
   const toast = useToast();
   const [formData, setFormData] = useState({
@@ -38,6 +40,7 @@ export default function RegisterPage() {
 
     if (data.success) {
       toast.success("Account created successfully! Redirecting to setup...");
+      setUser(data.user);
       router.push("/setup");
     } else {
       toast.error(data.message || "Registration failed. Please try again.");
