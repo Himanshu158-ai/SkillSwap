@@ -122,7 +122,7 @@ export default function SentRequestsPage() {
                   {/* Status badge */}
                   <span className={`shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium capitalize border
                     ${request.status === "accepted"
-                      ? "bg-green-500/10 border-green-500/20 text-green-400"
+                      ? "bg-[#D4AF37]/15 border border-[#D4AF37]/25 text-[#F5D76E]"
                       : request.status === "rejected"
                         ? "bg-red-500/10 border-red-500/20 text-red-400"
                         : "bg-amber-500/10 border-amber-500/20 text-amber-400"
