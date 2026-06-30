@@ -16,41 +16,33 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      maxlength:16,
-      minlength:8,
     },
 
     phone: {
       type: String,
       default: "",
-      maxlength:10,
-      minlength:10,
     },
 
     bio: {
       type: String,
       default: "",
       maxlength: 500,
+      minlength: 0,
     },
 
     location: {
       type: String,
       default: "",
-      maxlength:50,
     },
 
     canTeach: {
       type: [String],
       default: [],
-      maxlength:5,
-      minlength:0,
     },
 
     wantsToLearn: {
       type: [String],
       default: [],
-      max:5,
-      min:0,
     },
 
     isProfileCompleted: {
