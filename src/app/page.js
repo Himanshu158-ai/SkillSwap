@@ -67,15 +67,15 @@ export default function LandingPage() {
         </div>
 
         {/* Nav links — desktop only */}
-        <div className="hidden md:flex items-center gap-8">
-          {["Features", "How it works", "Community"].map((item, i) => (
-            <a
+        <div className="hidden md:flex items-center gap-10">
+          {["How it works", "Features", "Community",].map((item, i) => (
+            <Link
               key={item}
-              href={["#features", "#how", "#community"][i]}
+              href={["#how", "#features", "/discover"][i]}
               className="text-[13px] text-[#9D9489] hover:text-[#F6F3EE] transition-colors duration-200"
             >
               {item}
-            </a>
+            </Link>
           ))}
         </div>
 
