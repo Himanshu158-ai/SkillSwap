@@ -95,12 +95,13 @@ export async function PATCH(request) {
         await connectDB();
 
         const user = await request.json();
+        console.log(user);
 
         const updatedUser = await User.findByIdAndUpdate(
             user._id,
             user,
             {
-                new: true,
+                returnDocument: "after",
                 runValidators: true,
             }
         ).select("-password");
