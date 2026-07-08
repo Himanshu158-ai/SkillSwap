@@ -90,4 +90,44 @@ export async function GET(request) {
     }
 }
 
+export async function PATCH(request) {
+    try {
+        await connectDB();
+
+        const user = await request.json();
+
+        const updatedUser = await User.findByIdAndUpdate(
+            user._id,
+            user,
+            {
+                new: true,
+                runValidators: true,
+            }
+        ).select("-password");
+
+        if (!updatedUser) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "User not found",
+                },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json({
+            success: true,
+            user: updatedUser,
+        });
+
+    } catch (error) {
+        return NextResponse.json(
+            {
+                success: false,
+                message: error.message,
+            },
+            { status: 500 }
+        );
+    }
+}
 // --------------------------------- //
