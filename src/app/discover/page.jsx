@@ -16,7 +16,7 @@ export default function DiscoverPage() {
     if (!loading && !user) {
       router.push("/login");
     }
-  }, [user, loading, router]);
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -46,6 +46,7 @@ export default function DiscoverPage() {
       console.log(data);
       if (data.success) {
         toast.success(data.message);
+        setUser(null);
         router.push("/");
       } else {
         toast.error(data.message);
